@@ -17,7 +17,10 @@ namespace SampleWP
             var words = GetFileContents("book.txt");
             Dictionary<int, bool> primeNumbers = new Dictionary<int, bool>();
 
+            // get grouped words
             var result = WordsWithCount(words);
+
+            // display on console
             foreach (var word in result)
             {
                 if(!string.IsNullOrEmpty(word.Key.Trim()))
@@ -34,22 +37,33 @@ namespace SampleWP
             var words = GetFileContents("book.txt");
             Dictionary<int, bool> primeNumbers = new Dictionary<int, bool>();
 
+            // get unique words and their count
             var result = WordsWithCountDictionary(words);
 
+            // display on console
             foreach (KeyValuePair<string, int> pair in result)
             {
-                Console.WriteLine("{0} => {1} {2}", pair.Key, pair.Value, GetPrimeText(pair.Value, primeNumbers));
+                if (!string.IsNullOrEmpty(pair.Key.Trim()))
+                {
+                    Console.WriteLine("{0} => {1} {2}", pair.Key, pair.Value, GetPrimeText(pair.Value, primeNumbers));
+                }
             }
         }
         #endregion Display methods
 
         /// <summary>
-        /// Read the file contents and splits it into words list after sripping punctuations
+        /// Read the file contents and splits it into word list after sripping punctuations
         /// </summary>
         /// <param name="fileName"></param>
         /// <returns></returns>
         public List<string> GetFileContents(string fileName)
         {
+            /*
+             * If memory is a concern then,
+             * ReadAllText can be replaced by ReadLines 
+             * which will load single line at a time from file - this can be further process line by line 
+             * to gather words in list - will be slow compare to ReadAllText
+            */
             var wordsString = File.ReadAllText(fileName);
 
             // Ignore punctuation
