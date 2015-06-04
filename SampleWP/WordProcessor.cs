@@ -12,6 +12,7 @@ namespace SampleWP
         public void DisplayWordsWithCount()
         {
             var words = GetFileContents("book.txt");
+            Dictionary<int, bool> primeNumbers = new Dictionary<int, bool>();
 
             var result = WordsWithCount(words);
 
@@ -20,7 +21,7 @@ namespace SampleWP
                 if(!string.IsNullOrEmpty(word.Key.Trim()))
                 {
                     var wordCount = word.Count();
-                    Console.WriteLine("{0} => {1} {2}", word.Key, wordCount, IsPrimeNumber(wordCount) ? "[Prime]" : "");
+                    Console.WriteLine("{0} => {1} {2}", word.Key, wordCount, GetPrimeText(wordCount, primeNumbers));
                 }
             }
         }
@@ -44,6 +45,28 @@ namespace SampleWP
         public IEnumerable<IGrouping<string, string>> WordsWithCount(List<string> words)
         {
             return words.Cast<string>().GroupBy(w => w, StringComparer.CurrentCultureIgnoreCase);
+        }
+
+        /// <summary>
+        /// If the number is already checked for prime then read from dictionary
+        /// </summary>
+        /// <param name="number"></param>
+        /// <param name="primeNumbers"></param>
+        /// <returns></returns>
+        public string GetPrimeText(int number, Dictionary<int, bool> primeNumbers)
+        {
+            bool isPrime;
+            if (primeNumbers.ContainsKey(number))
+            {
+                isPrime = primeNumbers[number];
+            }
+            else
+            {
+                isPrime = IsPrimeNumber(number);
+                primeNumbers.Add(number, isPrime);
+            }
+
+            return isPrime ? "[Prime]" : "";
         }
 
         public bool IsPrimeNumber(int number)

@@ -93,5 +93,23 @@ namespace UnitTestSampleWP
             var actual = wordProcessor.IsPrimeNumber(89);
             Assert.AreEqual<bool>(true, actual, "89 Is PrimeNumber - failed");
         }
+
+        [TestMethod]
+        public void PrimeNumberReturnsPrime()
+        {
+            WordProcessor wordProcessor = new WordProcessor();
+            Dictionary<int, bool> primeNumbers = new Dictionary<int, bool>();
+            var actual = wordProcessor.GetPrimeText(89, primeNumbers);
+            Assert.AreEqual<string>("[Prime]", actual, "PrimeNumber does not Returns text Prime");
+        }
+
+        [TestMethod]
+        public void NotPrimeNumberReturnsEmpty()
+        {
+            WordProcessor wordProcessor = new WordProcessor();
+            Dictionary<int, bool> primeNumbers = new Dictionary<int, bool>();
+            var actual = wordProcessor.GetPrimeText(4, primeNumbers);
+            Assert.AreEqual<string>("", actual, "Not PrimeNumber does not Returns Empty");
+        }
     }
 }
