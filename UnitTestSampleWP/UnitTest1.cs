@@ -69,5 +69,29 @@ namespace UnitTestSampleWP
             var actual = result.Where(w => w.Key == "aaa").FirstOrDefault().Count();
             Assert.AreEqual<int>(3, actual, "Three times from file does not returns count 3");
         }
+
+        [TestMethod]
+        public void OneIsNotPrimeNumber()
+        {
+            WordProcessor wordProcessor = new WordProcessor();
+            var actual = wordProcessor.IsPrimeNumber(1);
+            Assert.AreEqual<bool>(false, actual, "One Is Not PrimeNumber - failed");
+        }
+
+        [TestMethod]
+        public void TwoIsPrimeNumber()
+        {
+            WordProcessor wordProcessor = new WordProcessor();
+            var actual = wordProcessor.IsPrimeNumber(2);
+            Assert.AreEqual<bool>(true, actual, "Two Is PrimeNumber - failed");
+        }
+
+        [TestMethod]
+        public void EightyNineIsPrimeNumber()
+        {
+            WordProcessor wordProcessor = new WordProcessor();
+            var actual = wordProcessor.IsPrimeNumber(89);
+            Assert.AreEqual<bool>(true, actual, "89 Is PrimeNumber - failed");
+        }
     }
 }

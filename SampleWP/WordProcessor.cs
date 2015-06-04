@@ -19,7 +19,8 @@ namespace SampleWP
             {
                 if(!string.IsNullOrEmpty(word.Key.Trim()))
                 {
-                    Console.WriteLine("{0} => {1}", word.Key, word.Count());
+                    var wordCount = word.Count();
+                    Console.WriteLine("{0} => {1} {2}", word.Key, wordCount, IsPrimeNumber(wordCount) ? "[Prime]" : "");
                 }
             }
         }
@@ -43,6 +44,31 @@ namespace SampleWP
         public IEnumerable<IGrouping<string, string>> WordsWithCount(List<string> words)
         {
             return words.Cast<string>().GroupBy(w => w, StringComparer.CurrentCultureIgnoreCase);
+        }
+
+        public bool IsPrimeNumber(int number)
+        {
+            // Test whether the parameter is a prime number.
+            if ((number & 1) == 0)
+            {
+                if (number == 2)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            for (int i = 3; (i * i) <= number; i += 2)
+            {
+                if ((number % i) == 0)
+                {
+                    return false;
+                }
+            }
+            return number != 1;
         }
     }
 }
