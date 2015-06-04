@@ -41,5 +41,23 @@ namespace UnitTestSampleWP
             var actual = result.Where(w => w.Key == "aaa").FirstOrDefault().Count();
             Assert.AreEqual<int>(3, actual, "Three times does not returns count 3");
         }
+
+        [TestMethod]
+        public void GetFileReturnsData()
+        {
+            WordProcessor wordProcessor = new WordProcessor();
+            var actual = wordProcessor.GetFileContents("book_test.txt");
+            Assert.IsNotNull(actual, "File not read");
+        }
+
+        [TestMethod]
+        public void ThreeTimesFromFileReturns3()
+        {
+            WordProcessor wordProcessor = new WordProcessor();
+            List<string> list = wordProcessor.GetFileContents("book_test.txt");
+            IEnumerable<IGrouping<string, string>> result = wordProcessor.WordsWithCount(list);
+            var actual = result.Where(w => w.Key == "aaa").FirstOrDefault().Count();
+            Assert.AreEqual<int>(3, actual, "Three times from file does not returns count 3");
+        }
     }
 }
