@@ -17,7 +17,10 @@ namespace SampleWP
 
             foreach (var word in result)
             {
-                Console.WriteLine("{0} => {1}", word.Key, word.Count());
+                if(!string.IsNullOrEmpty(word.Key.Trim()))
+                {
+                    Console.WriteLine("{0} => {1}", word.Key, word.Count());
+                }
             }
         }
 
@@ -26,7 +29,7 @@ namespace SampleWP
             var wordsString = File.ReadAllText(fileName);
 
             // Ignore punctuation
-            string[] stripPunctuations = { "\n", "\t", "\r", ";", ",", ".", "-", "_", "^", "(", ")", "[", "]"};
+            string[] stripPunctuations = { "\n", "\t", "\r", "\"", "!", "?", ":", ";", ",", ".", "-", "_", "^", "(", ")", "[", "]" };
             foreach (string pChar in stripPunctuations)
             {
                 wordsString = wordsString.Replace(pChar, " ");
