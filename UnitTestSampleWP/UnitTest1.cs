@@ -31,5 +31,15 @@ namespace UnitTestSampleWP
                 Assert.AreEqual<int>(1, word.Count(), "Single String does not returns count 1");
             }
         }
+
+        [TestMethod]
+        public void ThreeTimesReturns3()
+        {
+            WordProcessor wordProcessor = new WordProcessor();
+            List<string> list = new List<string>() { "aaa", "bbb", "aaa", "ccc", "ddd", "bbb", "aaa" };
+            IEnumerable<IGrouping<string, string>> result = wordProcessor.WordsWithCount(list);
+            var actual = result.Where(w => w.Key == "aaa").FirstOrDefault().Count();
+            Assert.AreEqual<int>(3, actual, "Three times does not returns count 3");
+        }
     }
 }

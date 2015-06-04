@@ -10,6 +10,10 @@ namespace SampleWP
     {
         static void Main(string[] args)
         {
+            WordProcessor wordProcessor = new WordProcessor();
+            wordProcessor.DisplayWordsWithCount();
+
+            Console.ReadKey();
         }
     }
 }
